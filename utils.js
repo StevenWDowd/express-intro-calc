@@ -6,6 +6,7 @@ const { BadRequestError } = require("./expressError");
 function convertStrNums(strNums) {
   // if the conversion isn't successful, throw a BadRequestError and will
   // be handled in your route
+  //TODO: Consider error throwing immediately after one bad input.
   let notNums = [];
     //const nums = strNums.map(val => Number.parseInt(val));
   let nums = [];
