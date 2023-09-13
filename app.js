@@ -14,7 +14,7 @@ const MISSING = "Expected key `nums` with comma-separated list of numbers.";
 /** Finds mean of nums in qs: returns {operation: "mean", result } */
 app.get("/mean", function(req, res) {
 
-  if (!res.query) {
+  if (!req.query) {
     throw new BadRequestError("Numbers are required");
   }
   const numStrings = req.query.nums.split(',');
@@ -27,8 +27,11 @@ app.get("/mean", function(req, res) {
 
 /** Finds median of nums in qs: returns {operation: "median", result } */
 app.get("/median", function(req, res) {
+  if (!req.query) {
+    throw new BadRequestError("Numbers are required");
+  }
   const numStrings = req.query.nums.split(',');
-  const nums = numStrings.map(val => Number.parseInt(val));
+  const nums = convertStrNums(numStrings);
   const median = findMedian(nums);
   return res.json({operation: "median", value: median});
 
@@ -37,8 +40,11 @@ app.get("/median", function(req, res) {
 
 /** Finds mode of nums in qs: returns {operation: "mean", result } */
 app.get("/mode", function(req, res) {
+  if (!req.query) {
+    throw new BadRequestError("Numbers are required");
+  }
   const numStrings = req.query.nums.split(',');
-  const nums = numStrings.map(val => Number.parseInt(val));
+  const nums = convertStrNums(numStrings);
   const mode = findMode(nums);
   return res.json({operation: "mode", value: mode});
 

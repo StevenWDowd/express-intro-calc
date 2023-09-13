@@ -12,14 +12,14 @@ function convertStrNums(strNums) {
     for (let str of strNums) {
       let converted = Number.parseInt(str);
       if (!converted){
-        notNums.push(converted);
+        notNums.push(str);
       } else {
         nums.push(converted);
       }
 
     }
     if (notNums.length > 0) {
-      const badNumString = notNums.join(" ,");
+      const badNumString = notNums.join(", ");
       //return {error: {message: `${badNumString} are not numbers`}};
       const errorMessage = `${badNumString} are not numbers`;
       throw new BadRequestError(errorMessage);
